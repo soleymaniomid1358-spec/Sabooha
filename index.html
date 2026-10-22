@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0759b2">
+<meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="کنکور سبوحا">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preload" href="fonts/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<title>کنکور سبوحا</title>
+<style>
+@font-face{font-family:Vazirmatn;src:url(fonts/Vazirmatn-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url(fonts/Vazirmatn-Medium.woff2) format("woff2");font-weight:500 600;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url(fonts/Vazirmatn-Bold.woff2) format("woff2");font-weight:700 800;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url(fonts/Vazirmatn-Black.woff2) format("woff2");font-weight:900;font-display:swap}
+:root{--blue:#0759b2;--blue2:#0874df;--orange:#ff842d;--bg:#f3f5fa;--card:#fff;--ink:#14243b;--muted:#738096;--line:#e7ebf2;--green:#18b978;--red:#f25b60;--amber:#e9a516}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);padding-bottom:calc(84px + env(safe-area-inset-bottom));-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit}
+button{touch-action:manipulation;cursor:pointer}
+.top{background:linear-gradient(115deg,#064c9b,#0878e8);color:#fff;padding:calc(18px + env(safe-area-inset-top)) 16px 22px;border-radius:0 0 24px 24px;box-shadow:0 10px 24px #0759b226}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:21px;font-weight:900}
+.subtitle{font-size:11px;opacity:.85}
+.datechip{border:1px solid #ffffff55;border-radius:12px;padding:7px 9px;font-size:11px;text-align:center}
+.wrap{padding:14px 12px;max-width:520px;margin:auto}
+.page{display:none}.page.active{display:block}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 2px 10px}
+.sectionhead h2{font-size:15px;margin:0}
+.muted{font-size:11px;color:var(--muted)}
+.catgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.cat{border:0;border-radius:16px;background:#fff;box-shadow:0 4px 12px #162c4b0c;min-height:104px;padding:12px 5px 9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink)}
+.cat .ico{width:42px;height:42px;border-radius:13px;background:#fff0e7;color:var(--orange);display:grid;place-items:center;font-size:22px;box-shadow:0 4px 10px #ff842d25}
+.cat strong{font-size:11px;font-weight:600}
+.cat small{font-size:10px;color:var(--muted)}
+.banner{margin:15px 0;border-radius:17px;background:linear-gradient(115deg,#074c97,#0877df);color:white;padding:15px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.banner.orange{background:linear-gradient(115deg,#f06d14,#ff9a48)}
+.banner .emoji{font-size:36px}
+.banner h3{font-size:14px;margin:0 0 3px}
+.banner p{font-size:10px;margin:0;opacity:.9}
+.card{background:var(--card);border-radius:17px;padding:14px;margin:11px 0;box-shadow:0 5px 18px #152b4a0b}
+.card h3{font-size:14px;margin:0 0 10px}
+.metricgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.metric{background:white;border-radius:16px;padding:12px;text-align:center;box-shadow:0 4px 15px #1a33510a}
+.gauge{width:92px;height:92px;margin:2px auto 7px;position:relative}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge circle{fill:none;stroke-width:9}
+.gauge .track{stroke:#edf0f6}
+.gauge .value{stroke:var(--blue2);stroke-linecap:round;stroke-dasharray:251.2;stroke-dashoffset:251.2;transition:stroke-dashoffset .3s}
+.gauge b{position:absolute;inset:0;display:grid;place-items:center;font-size:19px}
+.metric label{font-size:11px;color:var(--muted)}
+.progress{height:7px;background:#edf0f5;border-radius:99px;overflow:hidden;margin:8px 0}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#ff9a48,#ff7428);border-radius:99px}
+.progress.blue span{background:linear-gradient(90deg,#3b95f0,#0759b2)}
+.btn{border:0;border-radius:12px;background:#edf4ff;color:var(--blue);padding:10px 13px;font-size:12px;min-height:42px}
+.btn.primary{background:var(--blue);color:white}
+.btn.orange{background:var(--orange);color:white}
+.btn.ghost{background:#f5f6fa;color:#536176}
+.btn.danger{background:#fff0f0;color:#c93f45}
+.btn.sm{min-height:32px;padding:5px 9px;font-size:11px;border-radius:9px}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.field{display:block;font-size:11px;color:#56637a;margin:9px 0}
+.field input,.field select,.field textarea{display:block;width:100%;border:1px solid var(--line);border-radius:11px;background:white;padding:10px;margin-top:5px;min-height:43px;color:var(--ink);font-size:16px}
+textarea{min-height:82px;resize:vertical}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.full{grid-column:1/-1}
+.task{display:grid;grid-template-columns:42px 1fr auto;gap:9px;align-items:center;border-bottom:1px solid var(--line);padding:11px 0}
+.task:last-child{border:0}
+.time{font-size:10px;color:var(--blue);font-weight:bold;line-height:1.5}
+.task strong{font-size:12px}
+.task .meta{font-size:10px;color:var(--muted)}
+.task.fixed{opacity:.75}
+.task.fixed strong{color:#536176}
+.pct{width:74px;border:1px solid var(--line);border-radius:9px;padding:6px;font-size:11px;background:#fff;color:var(--ink)}
+.task input[type=checkbox]{width:19px;height:19px;accent-color:var(--green);flex:none}
+.taskline{display:flex;align-items:center;gap:8px}
+.task.done strong{text-decoration:line-through;color:#98a1b0}
+.tasknote{grid-column:2/-1;padding:0 0 8px}
+.tasknote textarea{width:100%;min-height:54px;font-size:16px;border:1px solid var(--line);border-radius:9px;padding:9px}
+.tasknote[hidden]{display:none!important}
+.pctwrap{display:flex;align-items:center;gap:5px}
+.notebtn{min-height:32px;padding:5px 8px;font-size:10px;white-space:nowrap}
+.tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 7px;border-radius:99px;color:#fff;vertical-align:middle;margin-left:3px}
+.t-مرور{background:#3b6fd4}.t-تست{background:#e2545a}.t-پیش‌خوانی{background:#c48a00}.t-هفتگی{background:#1f9c8e}.t-جبرانی{background:#8a4fd0}.t-ثابت{background:#8a95a7}.t-فعالیت{background:#ff842d}
+.weekmatrix{overflow:auto;direction:rtl;-webkit-overflow-scrolling:touch}
+.weekmatrix table{border-collapse:separate;border-spacing:3px;min-width:680px;width:100%;font-size:10px}
+.weekmatrix th{background:#edf4ff;color:#0759b2;padding:7px 4px;border-radius:6px;position:sticky;top:0}
+.weekmatrix td{min-width:76px;height:34px;background:#f7f9fc;border-radius:5px;padding:3px;vertical-align:top}
+.weekmatrix td.hour{min-width:42px;background:#edf0f5;text-align:center;font-weight:bold}
+.weekmatrix td.today{background:#fff6ee}
+.weekblock{background:#dcecff;border-right:3px solid #0874df;border-radius:5px;padding:4px;color:#174b7c;min-height:27px;margin-bottom:2px}
+.weekblock.k-تست{background:#ffe6e7;border-color:#e2545a;color:#8c2a2e}
+.weekblock.k-پیش‌خوانی{background:#fff3d6;border-color:#c48a00;color:#6e4d00}
+.weekblock.k-هفتگی{background:#dcf5f1;border-color:#1f9c8e;color:#145f57}
+.weekblock.k-جبرانی{background:#efe4fb;border-color:#8a4fd0;color:#55308a}
+.weekblock.k-ثابت{background:#eceff4;border-color:#a3acba;color:#5a6577}
+.weekblock.k-فعالیت{background:#fff0e7;border-color:#ff842d;color:#8a4210}
+.reportfilters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.reportfilters .full{grid-column:1/-1}
+.reportfilters input[inputmode=numeric]{direction:ltr;text-align:right}
+.pill{display:inline-block;background:#eef5ff;color:#34618e;padding:4px 8px;border-radius:999px;font-size:10px;white-space:nowrap}
+.pill.ok{background:#e5f8ef;color:#0f8a57}.pill.warn{background:#fff4e0;color:#a86a00}.pill.bad{background:#ffeced;color:#c93f45}
+.bottom{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#ffffffed;-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);border-top:1px solid #e5eaf2;display:flex;justify-content:space-around;padding:7px 4px calc(7px + env(safe-area-inset-bottom));max-width:560px;margin:auto}
+.bottom button{border:0;background:transparent;color:#8a95a7;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:42px;padding:5px 2px}
+.bottom button span{font-size:20px;line-height:1}
+.bottom button.active{color:var(--blue);font-weight:bold}
+.chart{width:100%;height:150px}
+.barrow{display:grid;grid-template-columns:82px 1fr 40px;gap:8px;align-items:center;font-size:10px;margin:10px 0}
+.barrow .progress{margin:0}
+.hidden{display:none!important}
+.empty{text-align:center;color:var(--muted);padding:18px;font-size:12px}
+.rule{height:1px;background:var(--line);margin:12px 0}
+.weekday{display:flex;gap:6px;overflow:auto;padding:4px 0}
+.weekday button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 11px;white-space:nowrap;font-size:11px;color:var(--ink)}
+.weekday button.sel{background:var(--blue);color:white;border-color:var(--blue)}
+.weekday button.istoday{border-color:var(--orange)}
+.daychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.daychips button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-size:11px;color:var(--ink)}
+.daychips button.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.toast{position:fixed;bottom:calc(95px + env(safe-area-inset-bottom));left:16px;right:16px;max-width:480px;margin:auto;background:#173454;color:white;padding:12px;border-radius:12px;font-size:12px;z-index:50;display:none;line-height:1.7}
+.toast.show{display:block}
+.toast.warn{background:#8a4a00}
+.examrow{display:grid;grid-template-columns:70px 1fr auto;gap:9px;align-items:center;border-bottom:1px solid var(--line);padding:9px 0;font-size:12px}
+.examrow:last-child{border:0}
+.examrow.past{opacity:.45}
+.examrow.next{background:#fff6ee;border-radius:10px;padding:9px 6px}
+#noteCard textarea{display:block;width:100%;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:16px;margin-bottom:8px;color:var(--ink)}
+.principles{margin:0;padding:0 16px 0 0;font-size:11px;color:#46546b;line-height:1.9}
+/* settings */
+.settings-item{border:1px solid var(--line);padding:9px;margin:8px 0}
+.settings-item .field{margin:5px 0}
+.settings-item #settingTitle{min-height:36px;padding:7px 9px}
+.settings-slots{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.day-slot{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:start;gap:6px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.day-slot:last-child{border:0}
+.day-check{display:flex;align-items:center;gap:4px;font-size:11px;white-space:nowrap;min-height:34px}
+.day-check input{width:15px;height:15px;margin:0;accent-color:var(--blue)}
+.slot-list{display:flex;flex-direction:column;gap:5px}
+.slot-row{display:grid;grid-template-columns:minmax(0,1fr) 10px minmax(0,1fr) 30px;align-items:center;gap:4px}
+.slot-row .sep{text-align:center;color:var(--muted);font-size:11px}
+.clock-input{width:100%;min-width:0;height:34px;border:1px solid var(--line);border-radius:7px;padding:4px 6px;font-size:16px;text-align:center;direction:ltr;font-variant-numeric:tabular-nums;background:#fff;color:var(--ink)}
+.clock-input.bad{border-color:var(--red);background:#fff5f5}
+.iconbtn{width:30px;height:30px;border:0;border-radius:8px;background:#fff0f0;color:#c93f45;font-size:14px;padding:0}
+.addslot{border:1px dashed #b9cbe6;background:#f7faff;color:var(--blue);border-radius:8px;height:30px;font-size:11px}
+.day-slot.off .slot-list{opacity:.35;pointer-events:none}
+.alloc{display:grid;grid-template-columns:minmax(0,1fr) 64px 52px 56px;gap:6px;align-items:center;font-size:11px;padding:7px 0;border-bottom:1px solid var(--line)}
+.alloc:last-child{border:0}
+.alloc.head{font-size:10px;color:var(--muted);padding-top:0}
+.alloc input{width:100%;height:34px;border:1px solid var(--line);border-radius:7px;text-align:center;font-size:16px;direction:ltr;background:#fff;color:var(--ink)}
+.alloc b{font-weight:700;text-align:center}
+.catedit{display:grid;grid-template-columns:52px minmax(0,1fr) 34px;gap:6px;align-items:center;margin:6px 0}
+.catedit input{height:36px;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:16px;min-width:0;width:100%;background:#fff;color:var(--ink)}
+.catedit input.emo{text-align:center}
+.schoolrow{display:grid;grid-template-columns:62px minmax(0,1fr);gap:6px;align-items:center;margin:6px 0;font-size:11px}
+.schoolrow input{height:36px;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:14px;width:100%;background:#fff;color:var(--ink)}
+.chipbar{display:flex;gap:6px;overflow:auto;padding:2px 0 6px;-webkit-overflow-scrolling:touch}
+.chipbar button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 10px;font-size:11px;white-space:nowrap;color:var(--ink)}
+.chipbar button.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.sumbar{display:flex;justify-content:space-between;align-items:center;background:#f7f9fc;border-radius:11px;padding:9px 11px;margin-top:8px;font-size:12px}
+@media(min-width:700px){body{background:#e8edf5}.top,.wrap,.bottom{max-width:440px}.top{margin:0 auto}.catgrid{gap:10px}}
+@media(max-width:380px){.bottom button{font-size:9px;min-width:35px}.bottom button span{font-size:17px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="toprow"><div><div class="brand">کنکور سبوحا</div><div class="subtitle">برنامه مطالعه یازدهم تجربی</div></div><div class="datechip"><span id="todayDateTop">—</span><br><b id="dayNameTop">—</b></div></div></header>
+<main class="wrap">
+
+<section class="page active" id="home">
+  <div class="sectionhead"><h2>دروس و فعالیت‌ها</h2><button class="btn" data-open="manage">＋ درس / فعالیت</button></div>
+  <div class="catgrid" id="categories"></div>
+  <div class="banner" data-page="today"><div class="emoji">📅</div><div><h3>برنامه امروز من</h3><p>بلوک‌های مطالعه، درصد پیشرفت و یادداشت‌ها را یکجا ببینید</p></div><span style="margin-right:auto;font-size:20px">‹</span></div>
+  <div class="banner orange hidden" id="nextExamBanner" data-page="exams"><div class="emoji">📝</div><div><h3 id="nextExamTitle">امتحان بعدی</h3><p id="nextExamSub">—</p></div><span style="margin-right:auto;font-size:20px">‹</span></div>
+  <div class="sectionhead"><h2>نمای کلی پیشرفت</h2><span class="muted">هفته جاری</span></div>
+  <div class="metricgrid"><div class="metric"><div class="gauge" id="dailyGauge"></div><label>پیشرفت مطالعه امروز</label></div><div class="metric"><div class="gauge" id="weeklyGauge"></div><label>تحقق ساعات هفتگی</label></div></div>
+  <div class="card"><div class="row"><h3>بلوک‌های پیش رو</h3><button class="btn ghost" data-page="today">مشاهده همه</button></div><div id="homeTasks"></div></div>
+  <div class="card"><h3>روند هفتگی</h3><svg id="trendChart" class="chart" viewBox="0 0 320 140" role="img" aria-label="نمودار روند مطالعه"></svg><div class="muted">دقایق مطالعه ثبت‌شده در هفت روز اخیر</div></div>
+</section>
+
+<section class="page" id="today">
+  <div class="sectionhead"><h2>برنامه امروز</h2><button class="btn" id="todayJump">امروز</button></div>
+  <div class="card">
+    <div class="row"><strong id="todayDateLabel">—</strong><span class="pill" id="todayCount">—</span></div>
+    <div class="weekday" id="dateStrip"></div>
+    <div class="muted" id="schoolLine"></div>
+    <div id="todayList"></div>
+    <div class="actions"><button class="btn primary" data-open="manage">＋ افزودن فعالیت</button><button class="btn" id="focusNote">یادداشت روز</button></div>
+  </div>
+  <div class="card" id="noteCard"><h3>یادداشت روز / مبحث نیازمند مرور</h3><textarea id="dayNote" placeholder="تست غلط، مبحث مبهم یا چیزی که باید دوباره مرور شود..."></textarea><button class="btn primary" id="saveNote">ذخیره یادداشت</button></div>
+</section>
+
+<section class="page" id="category">
+  <div class="sectionhead"><button class="btn ghost" data-page="home">→ بازگشت</button><h2 id="catTitle">درس</h2></div>
+  <div class="card"><div class="row"><span class="muted" id="catSummary"></span></div><div id="categoryList"></div><button class="btn primary" data-open="manage">＋ افزودن فعالیت به این درس</button></div>
+</section>
+
+<section class="page" id="manage">
+  <div class="sectionhead"><h2>افزودن فعالیت</h2><button class="btn ghost" data-page="home">بستن</button></div>
+  <div class="card">
+    <div class="formgrid">
+      <label class="field full">عنوان فعالیت<input id="newTitle" placeholder="مثلاً تست زیست‌شناسی یا مرور فیزیک"></label>
+      <label class="field">درس / دسته<select id="newCat"></select></label>
+      <label class="field">نوع فعالیت<select id="newRepeat"><option value="weekly">تکرارشونده هفتگی</option><option value="once">یک‌باره</option></select></label>
+      <label class="field full" id="newDateWrap">تاریخ شمسی<input id="newDate" placeholder="۱۴۰۵/۰۸/۰۲" inputmode="numeric"></label>
+      <div class="field full" id="newDaysWrap">روزهای هفته<div class="daychips" id="newDays"></div></div>
+      <label class="field">شروع<input id="newStart" class="clock-input" inputmode="numeric" maxlength="5" value="18:00" style="height:43px"></label>
+      <label class="field">پایان<input id="newEnd" class="clock-input" inputmode="numeric" maxlength="5" value="18:30" style="height:43px"></label>
+      <label class="field full">توضیح اختیاری<input id="newDesc" placeholder="منبع، فصل یا یادآوری"></label>
+    </div>
+    <div class="rule"></div>
+    <div class="row"><label class="field" style="flex:1">درس / دسته جدید<input id="newCatName" placeholder="مثلاً کلاس تقویتی"></label><button class="btn orange" id="addCategory">افزودن</button></div>
+    <div class="actions"><button class="btn primary" id="saveActivity">ذخیره فعالیت</button><button class="btn ghost" id="clearActivity">پاک‌کردن فرم</button></div>
+    <p class="muted">برای فعالیت یک‌باره تاریخ شمسی لازم است. برای فعالیت هفتگی یک یا چند روز انتخاب کنید؛ ساعت‌های هر روز را بعداً در «تنظیمات» جداگانه تغییر دهید.</p>
+  </div>
+</section>
+
+<section class="page" id="weekly">
+  <div class="sectionhead"><h2>برنامه هفتگی</h2><span class="pill">ماتریس روز × ساعت</span></div>
+  <div class="card"><p class="muted" style="margin-top:0">نمای زمان‌بندی بلوک‌ها در روزهای هفته؛ برای مشاهده کامل، افقی پیمایش کنید.</p><div id="weekMatrix" class="weekmatrix"></div></div>
+  <div class="sectionhead"><h2>ساعات هفتگی هر درس</h2><span class="pill">شنبه تا جمعه</span></div>
+  <div class="card"><div id="weeklyList"></div></div>
+  <div class="card"><h3>بلوک‌های ناقص برای جبران</h3><p class="muted" style="margin-top:0">بلوک‌های این هفته که کمتر از ۱۰۰٪ انجام شده‌اند؛ «جبران» یک بلوک یک‌باره در اولین زمان خالی فردا می‌سازد.</p><div id="carryList"></div></div>
+</section>
+
+<section class="page" id="exams">
+  <div class="sectionhead"><h2>امتحانات و تخصیص زمان</h2></div>
+  <div class="card"><h3>پیشرفت این هفته — دروس اختصاصی</h3><div class="metricgrid" id="examGauges"></div></div>
+  <div class="card"><div class="row"><h3>برنامه امتحانات</h3><span class="pill" id="examCount">—</span></div><div id="examList"></div>
+    <div class="rule"></div>
+    <div class="formgrid"><label class="field">تاریخ شمسی<input id="examDate" placeholder="۱۴۰۵/۰۸/۰۹" inputmode="numeric"></label><label class="field">درس<input id="examSubject" placeholder="مثلاً زیست" list="examSubjects"></label></div>
+    <datalist id="examSubjects"></datalist>
+    <div class="actions"><button class="btn primary" id="addExam">＋ افزودن امتحان</button><button class="btn ghost" id="togglePast">نمایش گذشته</button></div>
+  </div>
+  <div class="card"><h3>تخصیص زمان هفتگی (ساعت)</h3><div id="timeBars"></div><div class="rule"></div><h3>اصول برنامه مشاور</h3><ul class="principles">
+    <li>هدف حدود ۳۳ ساعت مطالعه در هفته؛ بعد از هر یک ساعت مطالعه پیوسته ۱۰ دقیقه استراحت.</li>
+    <li>«مرور» یعنی یادآوری فعال بدون نگاه به کتاب و حداکثر ۳۰ دقیقه در همان روز.</li>
+    <li>بیشترین زمان هر درس به «تست» و «مرور هفتگی» فاصله‌دار می‌رسد؛ خواندن مجدد و هایلایت کم‌اثرند.</li>
+    <li>«پیش‌خوانی» فقط ۳۰ دقیقه و برای حسابان، فیزیک، شیمی و زیست.</li>
+    <li>دروس عمومی در کنکور نمی‌آیند؛ فقط مرور و نمونه‌سؤال تشریحی امتحان نهایی.</li>
+    <li>اگر فردا امتحان است، پیش‌خوانی امشب جای خود را به مرور درس امتحان می‌دهد.</li>
+  </ul></div>
+</section>
+
+<section class="page" id="report">
+  <div class="sectionhead"><h2>گزارش و پشتیبان</h2></div>
+  <div class="card"><h3>داده‌های من</h3><div class="actions"><button class="btn primary" id="exportData">دانلود پشتیبان JSON</button><label class="btn" for="importData" style="display:inline-flex;align-items:center">بازیابی JSON</label><input class="hidden" id="importData" type="file" accept="application/json,.json"></div><p class="muted">اطلاعات روی همین گوشی/مرورگر ذخیره می‌شود. هفته‌ای یک بار پشتیبان بگیرید.</p></div>
+  <div class="card"><h3>جست‌وجوی گزارش فعالیت‌ها</h3>
+    <div class="reportfilters"><label class="field">از تاریخ شمسی<input type="text" id="filterFrom" placeholder="۱۴۰۵/۰۷/۰۱" inputmode="numeric"></label><label class="field">تا تاریخ شمسی<input type="text" id="filterTo" placeholder="۱۴۰۵/۰۷/۳۰" inputmode="numeric"></label><label class="field full">درس / دسته<select id="filterCat"><option value="">همه دروس</option></select></label><label class="field full">جست‌وجو در عنوان یا یادداشت<input id="filterText" placeholder="عبارت مورد جست‌وجو…"></label></div>
+    <div class="actions"><button class="btn" id="clearFilters">پاک‌کردن فیلترها</button></div>
+    <p class="muted" id="reportCount"></p><div id="logsList"></div></div>
+</section>
+
+<section class="page" id="settings">
+  <div class="sectionhead"><h2>تنظیمات برنامه</h2><span class="pill">درس، روز و ساعت</span></div>
+  <div class="card"><h3>ساعات تخصیص‌یافته هفتگی</h3><p class="muted" style="margin-top:0">«هدف» را برای هر درس وارد کن؛ «برنامه» از جمع بلوک‌های تعریف‌شده محاسبه می‌شود.</p><div id="allocTable"></div><div class="actions"><button class="btn primary" id="saveTargets">ذخیره اهداف</button><button class="btn ghost" id="targetsFromPlan">هدف = برنامه فعلی</button></div></div>
+  <div class="card"><div class="row"><h3 style="margin:0">ویرایش فعالیت</h3><button class="btn sm" data-open="manage">＋ فعالیت جدید</button></div><p class="muted">درس را انتخاب کن، سپس فعالیت؛ برای هر روز می‌توانی یک یا چند بازه ساعت تعیین کنی.</p><div id="settingsActivities"></div></div>
+  <div class="card"><h3>دروس و دسته‌ها</h3><p class="muted" style="margin-top:0">نام و آیکن را تغییر بده؛ دسته فقط وقتی فعالیتی نداشته باشد حذف می‌شود.</p><div id="catEditor"></div><div class="actions"><button class="btn primary" id="saveCats">ذخیره دروس</button></div></div>
+  <div class="card"><h3>کلاس‌های مدرسه</h3><p class="muted" style="margin-top:0">در صفحه «امروز» زیر تاریخ نمایش داده می‌شود.</p><div id="schoolEditor"></div><div class="actions"><button class="btn primary" id="saveSchool">ذخیره کلاس‌ها</button></div></div>
+  <div class="card"><h3>بازنشانی</h3><p class="muted" style="margin-top:0">برنامه هفتگی و اهداف به برنامه پیشنهادی مشاور برمی‌گردد؛ گزارش‌ها، یادداشت‌ها و امتحانات حفظ می‌شوند.</p><button class="btn danger" id="resetPlan">بازگشت به برنامه مشاور</button></div>
+</section>
+
+</main>
+<nav class="bottom">
+  <button class="active" data-page="home"><span>⌂</span>خانه</button>
+  <button data-page="today"><span>▦</span>امروز</button>
+  <button data-page="weekly"><span>◷</span>هفته</button>
+  <button data-page="exams"><span>✎</span>امتحان</button>
+  <button data-page="report"><span>↗</span>گزارش</button>
+  <button data-page="settings"><span>⚙</span>تنظیمات</button>
+</nav>
+<div class="toast" id="toast"></div>
+<script src="app.js?v=1" defer></script>
+<script>if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}</script>
+</body>
+</html>
