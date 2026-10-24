@@ -30,6 +30,13 @@ button{touch-action:manipulation;cursor:pointer}
 .toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{font-size:21px;font-weight:900}
 .subtitle{font-size:11px;opacity:.85}
+.profilechip{margin-top:6px;border:1px solid #ffffff66;background:#ffffff1f;color:#fff;border-radius:99px;padding:3px 10px;font-size:11px}
+.profrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.profrow:last-child{border-bottom:0}
+.profrow.active strong{color:var(--blue)}
+.profrow .pctwrap{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.subcard{background:#f7f9fc;border-radius:12px;padding:4px 11px 10px;margin-top:10px}
+.subcard h4{margin:10px 0 2px;font-size:13px}
 .datechip{border:1px solid #ffffff55;border-radius:12px;padding:7px 9px;font-size:11px;text-align:center}
 .wrap{padding:14px 12px;max-width:520px;margin:auto}
 .page{display:none}.page.active{display:block}
@@ -127,6 +134,15 @@ textarea{min-height:82px;resize:vertical}
 .weeknav .btn{white-space:nowrap}
 .weeklbl{text-align:center;line-height:1.5}.weeklbl b{display:block;font-size:12px}.weeklbl small{font-size:10px;color:var(--muted)}
 .weeknav.other .weeklbl b{color:var(--orange)}
+.weekstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 4px}
+.weekstats div{background:#f6f9fe;border:1px solid var(--line);border-radius:12px;padding:9px 4px;text-align:center}
+.weekstats b{display:block;font-size:17px;color:var(--blue)}
+.weekstats small{font-size:10px;color:var(--muted)}
+.weekhist{display:flex;gap:6px;overflow:auto;padding:8px 0 4px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.weekhist button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 8px;font-size:10px;color:var(--ink);text-align:center;min-width:58px;line-height:1.6}
+.weekhist button b{display:block;font-size:13px}
+.weekhist button.sel{border-color:var(--blue);background:#eef5ff}
+.weekhist button.lo b{color:var(--red)}.weekhist button.mid b{color:var(--amber)}.weekhist button.hi b{color:var(--green)}
 .daychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
 .daychips button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-size:11px;color:var(--ink)}
 .daychips button.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -175,7 +191,7 @@ textarea{min-height:82px;resize:vertical}
 </style>
 </head>
 <body>
-<header class="top"><div class="toprow"><div><div class="brand">کنکور سبوحا</div><div class="subtitle">برنامه مطالعه یازدهم تجربی</div></div><div class="datechip"><span id="todayDateTop">—</span><br><b id="dayNameTop">—</b></div></div></header>
+<header class="top"><div class="toprow"><div><div class="brand">کنکور سبوحا</div><div class="subtitle">برنامه مطالعه یازدهم تجربی</div><button type="button" class="profilechip" id="profileChip">👤 <span id="profileName">—</span> ▾</button></div><div class="datechip"><span id="todayDateTop">—</span><br><b id="dayNameTop">—</b></div></div></header>
 <main class="wrap">
 
 <section class="page active" id="home">
@@ -228,10 +244,10 @@ textarea{min-height:82px;resize:vertical}
 </section>
 
 <section class="page" id="weekly">
-  <div class="sectionhead"><h2>برنامه هفتگی</h2><span class="pill">ماتریس روز × ساعت</span></div>
-  <div class="card"><p class="muted" style="margin-top:0">نمای زمان‌بندی بلوک‌ها در روزهای هفته؛ برای مشاهده کامل، افقی پیمایش کنید.</p><div id="weekMatrix" class="weekmatrix"></div></div>
   <div class="sectionhead"><h2>ساعات هفتگی هر درس</h2><span class="pill">شنبه تا جمعه</span></div>
-  <div class="card"><div id="weeklyList"></div></div>
+  <div class="card"><div class="weeknav" data-wknav="goals"><button type="button" class="btn sm" data-wk="-1">› هفته قبل</button><div class="weeklbl"><b data-wklabel>این هفته</b><small data-wkrange></small></div><button type="button" class="btn sm" data-wk="1">هفته بعد ‹</button></div><div class="weekstats" id="weekStats"></div><div id="weekHistory" class="weekhist"></div><div id="weeklyList"></div></div>
+  <div class="sectionhead"><h2>برنامه هفتگی</h2><span class="pill">ماتریس روز × ساعت</span></div>
+  <div class="card"><div class="weeknav" data-wknav="top"><button type="button" class="btn sm" data-wk="-1">› هفته قبل</button><div class="weeklbl"><b data-wklabel>این هفته</b><small data-wkrange></small></div><button type="button" class="btn sm" data-wk="1">هفته بعد ‹</button></div><p class="muted">نمای زمان‌بندی بلوک‌ها در روزهای هفته؛ برای مشاهده کامل، افقی پیمایش کنید.</p><div id="weekMatrix" class="weekmatrix"></div></div>
   <div class="card"><h3>بلوک‌های ناقص برای جبران</h3><p class="muted" style="margin-top:0">بلوک‌های این هفته که کمتر از ۱۰۰٪ انجام شده‌اند؛ «جبران» یک بلوک یک‌باره در اولین زمان خالی فردا می‌سازد.</p><div id="carryList"></div></div>
 </section>
 
@@ -256,7 +272,7 @@ textarea{min-height:82px;resize:vertical}
 
 <section class="page" id="report">
   <div class="sectionhead"><h2>گزارش و پشتیبان</h2></div>
-  <div class="card"><h3>داده‌های من</h3><div class="actions"><button class="btn primary" id="exportData">دانلود پشتیبان JSON</button><label class="btn" for="importData" style="display:inline-flex;align-items:center">بازیابی JSON</label><input class="hidden" id="importData" type="file" accept="application/json,.json"></div><p class="muted">اطلاعات روی همین گوشی/مرورگر ذخیره می‌شود. هفته‌ای یک بار پشتیبان بگیرید.</p></div>
+  <div class="card"><h3>داده‌های پروفایل فعلی</h3><div class="actions"><button class="btn primary" id="exportData">دانلود پشتیبان JSON</button><label class="btn" for="importData" style="display:inline-flex;align-items:center">بازیابی JSON</label><input class="hidden" id="importData" type="file" accept="application/json,.json"></div><p class="muted">اطلاعات روی همین گوشی/مرورگر ذخیره می‌شود. هفته‌ای یک بار پشتیبان بگیرید.</p></div>
   <div class="card"><h3>جست‌وجوی گزارش فعالیت‌ها</h3>
     <div class="reportfilters"><label class="field">از تاریخ شمسی<input type="text" id="filterFrom" placeholder="۱۴۰۵/۰۷/۰۱" inputmode="numeric"></label><label class="field">تا تاریخ شمسی<input type="text" id="filterTo" placeholder="۱۴۰۵/۰۷/۳۰" inputmode="numeric"></label><label class="field full">درس / دسته<select id="filterCat"><option value="">همه دروس</option></select></label><label class="field full">جست‌وجو در عنوان یا یادداشت<input id="filterText" placeholder="عبارت مورد جست‌وجو…"></label></div>
     <div class="actions"><button class="btn" id="clearFilters">پاک‌کردن فیلترها</button></div>
@@ -265,6 +281,17 @@ textarea{min-height:82px;resize:vertical}
 
 <section class="page" id="settings">
   <div class="sectionhead"><h2>تنظیمات برنامه</h2><span class="pill">درس، روز و ساعت</span></div>
+  <div class="card" id="profilesCard"><h3>پروفایل‌ها</h3><p class="muted" style="margin-top:0">هر پروفایل برنامه هفتگی، اهداف، امتحانات و گزارش‌های جداگانه دارد. پروفایل فعال با رنگ آبی مشخص است.</p><div id="profileList"></div>
+    <div class="subcard"><h4>＋ پروفایل جدید</h4>
+      <label class="field">نام پروفایل<input id="newProfName" placeholder="مثلاً: علی"></label>
+      <label class="field">برنامه هفتگی از کجا بیاید؟<select id="newProfSource"></select></label>
+      <label class="field hidden" id="newProfModeWrap">چه چیزی کپی شود؟<select id="newProfMode"><option value="tpl">فقط قالب: دروس، اهداف، فعالیت‌ها و ساعات، کلاس‌های مدرسه</option><option value="full">قالب + محتوا: پیشرفت‌ها، یادداشت‌ها، گزارش‌ها، امتحانات و بلوک‌های یک‌باره</option></select></label>
+      <label class="field hidden" id="newProfFileWrap">فایل اکسل قالب<input id="newProfFile" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label>
+      <div class="actions"><button class="btn primary" id="createProfile" style="flex:1">ساخت و ورود به پروفایل</button></div></div>
+    <div class="subcard"><h4>📊 قالب اکسل</h4><p class="muted" style="margin:2px 0">فقط چارچوب برنامه (دروس، اهداف، فعالیت‌ها، روز و ساعت، کلاس‌های مدرسه) خروجی گرفته می‌شود؛ پیشرفت و یادداشت‌ها کپی نمی‌شوند. فایل را ویرایش کنید و برای پروفایل جدید یا فعلی بارگذاری کنید.</p>
+      <label class="field">قالب از<select id="xlsSource"></select></label>
+      <div class="actions"><button class="btn" id="exportXlsx">دریافت اکسل قالب</button><label class="btn ghost" for="importXlsx" style="display:inline-flex;align-items:center">جایگزینی برنامه پروفایل فعلی با اکسل</label><input class="hidden" id="importXlsx" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div></div>
+  </div>
   <div class="card"><h3>ساعات تخصیص‌یافته هفتگی</h3><p class="muted" style="margin-top:0">«هدف» را برای هر درس وارد کن؛ «برنامه» از جمع بلوک‌های تعریف‌شده محاسبه می‌شود.</p><div id="allocTable"></div><div class="actions"><button class="btn primary" id="saveTargets">ذخیره اهداف</button><button class="btn ghost" id="targetsFromPlan">هدف = برنامه فعلی</button></div></div>
   <div class="card"><div class="row"><h3 style="margin:0">ویرایش فعالیت</h3><button class="btn sm" data-open="manage">＋ فعالیت جدید</button></div><p class="muted">درس را انتخاب کن، سپس فعالیت؛ برای هر روز می‌توانی یک یا چند بازه ساعت تعیین کنی.</p><div id="settingsActivities"></div></div>
   <div class="card"><h3>دروس و دسته‌ها</h3><p class="muted" style="margin-top:0">نام و آیکن را تغییر بده؛ دسته فقط وقتی فعالیتی نداشته باشد حذف می‌شود.</p><div id="catEditor"></div><div class="actions"><button class="btn primary" id="saveCats">ذخیره دروس</button></div></div>
@@ -282,7 +309,7 @@ textarea{min-height:82px;resize:vertical}
   <button data-page="settings"><span>⚙</span>تنظیمات</button>
 </nav>
 <div class="toast" id="toast"></div>
-<script src="app.js?v=2" defer></script>
+<script src="app.js?v=5" defer></script>
 <script>if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}</script>
 </body>
 </html>
