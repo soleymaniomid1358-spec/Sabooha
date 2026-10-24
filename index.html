@@ -123,6 +123,10 @@ textarea{min-height:82px;resize:vertical}
 .weekday button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 11px;white-space:nowrap;font-size:11px;color:var(--ink)}
 .weekday button.sel{background:var(--blue);color:white;border-color:var(--blue)}
 .weekday button.istoday{border-color:var(--orange)}
+.weeknav{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:10px 0 2px}
+.weeknav .btn{white-space:nowrap}
+.weeklbl{text-align:center;line-height:1.5}.weeklbl b{display:block;font-size:12px}.weeklbl small{font-size:10px;color:var(--muted)}
+.weeknav.other .weeklbl b{color:var(--orange)}
 .daychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
 .daychips button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-size:11px;color:var(--ink)}
 .daychips button.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -189,6 +193,7 @@ textarea{min-height:82px;resize:vertical}
   <div class="sectionhead"><h2>برنامه امروز</h2><button class="btn" id="todayJump">امروز</button></div>
   <div class="card">
     <div class="row"><strong id="todayDateLabel">—</strong><span class="pill" id="todayCount">—</span></div>
+    <div class="weeknav"><button type="button" class="btn sm" id="prevWeek" aria-label="هفته قبل">› هفته قبل</button><div class="weeklbl"><b id="weekLabel">این هفته</b><small id="weekRange"></small></div><button type="button" class="btn sm" id="nextWeek" aria-label="هفته بعد">هفته بعد ‹</button></div>
     <div class="weekday" id="dateStrip"></div>
     <div class="muted" id="schoolLine"></div>
     <div id="todayList"></div>
@@ -277,7 +282,7 @@ textarea{min-height:82px;resize:vertical}
   <button data-page="settings"><span>⚙</span>تنظیمات</button>
 </nav>
 <div class="toast" id="toast"></div>
-<script src="app.js?v=1" defer></script>
+<script src="app.js?v=2" defer></script>
 <script>if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}</script>
 </body>
 </html>

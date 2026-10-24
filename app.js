@@ -83,6 +83,10 @@ function renderHome(){const t=todayISO();gauge('dailyGauge',dailyPct(t));gauge('
 /* ---------- امروز ---------- */
 function renderToday(){const sd=selectedDate,t=todayISO();
   document.getElementById('todayDateLabel').textContent=DAYS[dayIdx(sd)]+' · '+jalali(sd);
+  const ws=weekStart(sd),wo=Math.round((dateOf(ws)-dateOf(weekStart(t)))/864e5/7);
+  document.getElementById('weekLabel').textContent=wo===0?'این هفته':wo===-1?'هفته قبل':wo===1?'هفته بعد':fa(Math.abs(wo))+(wo<0?' هفته قبل':' هفته بعد');
+  document.getElementById('weekRange').textContent=jshort(ws)+' تا '+jshort(shift(ws,6));
+  document.querySelector('.weeknav').classList.toggle('other',wo!==0);
   document.getElementById('dateStrip').innerHTML=Array.from({length:7},(_,i)=>{const d=shift(weekStart(sd),i);return `<button data-date="${d}" class="${d===sd?'sel':''} ${d===t?'istoday':''}">${DAYS[i]}<br>${jday(d)}</button>`}).join('');
   const lines=[],sc=state.school[dayIdx(sd)];if(sc)lines.push('🏫 کلاس‌ها: '+esc(sc));examsOn(sd).forEach(e=>lines.push('📝 امروز امتحان '+esc(e.subject)));examsOn(shift(sd,1)).forEach(e=>lines.push(`<b style="color:#c25a0c">📝 فردا امتحان ${esc(e.subject)} — پیش‌خوانی امشب را به مرور ${esc(e.subject)} اختصاص بده.</b>`));
   document.getElementById('schoolLine').innerHTML=lines.map(l=>`<div style="margin:3px 0">${l}</div>`).join('');
@@ -189,6 +193,9 @@ function init(){selectedDate=todayISO();load();try{navigator.storage?.persist?.(
   tl.addEventListener('focusout',e=>{if(e.target.closest('[data-lognote]')){renderHome();renderLogs()}});
   tl.addEventListener('click',e=>{const del=e.target.closest('[data-note-delete]');if(del){const ins=del.dataset.noteDelete;upsertLog(ins,{note:''});save();return}const b=e.target.closest('[data-note-toggle]');if(!b)return;const panel=[...document.querySelectorAll('[data-note-panel]')].find(el=>el.dataset.notePanel===b.dataset.noteToggle);if(panel){panel.hidden=!panel.hidden;if(!panel.hidden)panel.querySelector('textarea')?.focus()}});
   document.getElementById('dateStrip').addEventListener('click',e=>{const b=e.target.closest('[data-date]');if(b){selectedDate=b.dataset.date;renderToday()}});
+  document.getElementById('prevWeek').addEventListener('click',()=>{selectedDate=shift(selectedDate,-7);renderToday()});
+  document.getElementById('nextWeek').addEventListener('click',()=>{selectedDate=shift(selectedDate,7);renderToday()});
+  {let sx=0,sy=0;const card=document.getElementById('todayList');card.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});card.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*2&&!e.target.closest('select,input,textarea')){selectedDate=shift(selectedDate,dx>0?1:-1);renderToday()}},{passive:true})}
   document.getElementById('todayJump').addEventListener('click',()=>{selectedDate=todayISO();renderToday()});
   document.getElementById('focusNote').addEventListener('click',()=>{const n=document.getElementById('dayNote');n.scrollIntoView({behavior:'smooth',block:'center'});n.focus()});
   document.getElementById('saveNote').addEventListener('click',()=>{const v=document.getElementById('dayNote').value;if(v.trim())state.notes[selectedDate]=v;else delete state.notes[selectedDate];save();toast('یادداشت ذخیره شد')});
