@@ -97,7 +97,7 @@ textarea{min-height:82px;resize:vertical}
 .pctwrap{display:flex;align-items:center;gap:5px}
 .notebtn{min-height:32px;padding:5px 8px;font-size:10px;white-space:nowrap}
 .tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 7px;border-radius:99px;color:#fff;vertical-align:middle;margin-left:3px}
-.t-مرور{background:#3b6fd4}.t-تست{background:#e2545a}.t-پیش‌خوانی{background:#c48a00}.t-هفتگی{background:#1f9c8e}.t-جبرانی{background:#8a4fd0}.t-ثابت{background:#8a95a7}.t-فعالیت{background:#ff842d}
+.t-مرور{background:#3b6fd4}.t-تست{background:#e2545a}.t-پیش‌خوانی{background:#c48a00}.t-هفتگی{background:#1f9c8e}.t-جبرانی{background:#8a4fd0}.t-ثابت{background:#8a95a7}.t-فعالیت{background:#ff842d}.t-پیش‌مطالعه{background:#b07800}.t-حل.تمرین{background:#d4436f}.t-کلاس{background:#5b5fc7}.t-آزمون{background:#2f8f3a}.t-آمادگی.آزمون{background:#e07b00}
 .weekmatrix{overflow:auto;direction:rtl;-webkit-overflow-scrolling:touch}
 .weekmatrix table{border-collapse:separate;border-spacing:3px;min-width:680px;width:100%;font-size:10px}
 .weekmatrix th{background:#edf4ff;color:#0759b2;padding:7px 4px;border-radius:6px;position:sticky;top:0}
@@ -111,6 +111,22 @@ textarea{min-height:82px;resize:vertical}
 .weekblock.k-جبرانی{background:#efe4fb;border-color:#8a4fd0;color:#55308a}
 .weekblock.k-ثابت{background:#eceff4;border-color:#a3acba;color:#5a6577}
 .weekblock.k-فعالیت{background:#fff0e7;border-color:#ff842d;color:#8a4210}
+.weekblock.k-پیش‌مطالعه{background:#fff3d6;border-color:#b07800;color:#6e4d00}
+.weekblock.k-حل.تمرین{background:#ffe3ec;border-color:#d4436f;color:#8a1f45}
+.weekblock.k-کلاس{background:#e6e7fb;border-color:#5b5fc7;color:#33368a}
+.weekblock.k-آمادگی.آزمون{background:#ffe9cc;border-color:#e07b00;color:#7a4300}
+.card.maxi{position:fixed;inset:0;z-index:60;margin:0;border-radius:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(10px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left))}
+.card.maxi .matrixhead{position:sticky;top:calc(-10px - env(safe-area-inset-top));background:#fff;z-index:3;padding:6px 0}
+.card.maxi .weekmatrix table{font-size:11px}
+body.noscroll{overflow:hidden}
+.weekblock{cursor:pointer;transition:opacity .15s}.weekmatrix.focus .weekblock{opacity:.12}.weekmatrix.focus .weekblock.on{opacity:1;box-shadow:0 0 0 2px #0759b2 inset}
+.weekblock.k-آزمون{background:#e0f5e2;border-color:#2f8f3a;color:#1d5c25}
+.accbig{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}.accbig b{font-size:30px;font-weight:900}.accbig span{font-size:11px;color:var(--muted)}
+.accbig.ok b{color:var(--green)}.accbig.warn b{color:var(--amber)}.accbig.bad b{color:var(--red)}
+.acctable{margin-top:8px}.acc{display:grid;grid-template-columns:minmax(0,1.4fr) .5fr 1fr 1fr .6fr;gap:4px;align-items:center;font-size:11px;padding:6px 0;border-bottom:1px solid var(--line);text-align:center}
+.acc span:first-child{text-align:right}.acc.head{color:var(--muted);font-size:10px}.acc b.lo{color:var(--red)}.acc b.mid{color:var(--amber)}.acc b.hi{color:var(--green)}
+.accgaps{margin-top:8px;font-size:11px;color:#56637a}.accgaps summary{cursor:pointer;color:var(--blue);margin-bottom:4px}.accgaps div{padding:2px 0}
+.corechk{display:flex;align-items:center;gap:3px;font-size:10px;color:#56637a;white-space:nowrap}.corechk input{width:auto;height:auto}
 .reportfilters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .reportfilters .full{grid-column:1/-1}
 .reportfilters input[inputmode=numeric]{direction:ltr;text-align:right}
@@ -177,7 +193,7 @@ textarea{min-height:82px;resize:vertical}
 .alloc.head{font-size:10px;color:var(--muted);padding-top:0}
 .alloc input{width:100%;height:34px;border:1px solid var(--line);border-radius:7px;text-align:center;font-size:16px;direction:ltr;background:#fff;color:var(--ink)}
 .alloc b{font-weight:700;text-align:center}
-.catedit{display:grid;grid-template-columns:52px minmax(0,1fr) 34px;gap:6px;align-items:center;margin:6px 0}
+.catedit{display:grid;grid-template-columns:52px minmax(0,1fr) auto 34px;gap:6px;align-items:center;margin:6px 0}
 .catedit input{height:36px;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:16px;min-width:0;width:100%;background:#fff;color:var(--ink)}
 .catedit input.emo{text-align:center}
 .schoolrow{display:grid;grid-template-columns:62px minmax(0,1fr);gap:6px;align-items:center;margin:6px 0;font-size:11px}
@@ -246,9 +262,11 @@ textarea{min-height:82px;resize:vertical}
 <section class="page" id="weekly">
   <div class="sectionhead"><h2>ساعات هفتگی هر درس</h2><span class="pill">شنبه تا جمعه</span></div>
   <div class="card"><div class="weeknav" data-wknav="goals"><button type="button" class="btn sm" data-wk="-1">› هفته قبل</button><div class="weeklbl"><b data-wklabel>این هفته</b><small data-wkrange></small></div><button type="button" class="btn sm" data-wk="1">هفته بعد ‹</button></div><div class="weekstats" id="weekStats"></div><div id="weekHistory" class="weekhist"></div><div id="weeklyList"></div></div>
+  <div class="sectionhead"><h2>شاخص دقت برنامه‌ریزی</h2><span class="pill">دروس تخصصی</span></div>
+  <div class="card"><div id="accuracyBox"></div><p class="muted">اعداد جدول: دقیقه موجود در برنامه / دقیقه لازم. برای هر زنگ درس تخصصی در مدرسه: یک‌چهارم زمان زنگ «پیش‌مطالعه» در روز قبل و به اندازه زمان زنگ «حل تمرین» همان روز بعد از مدرسه. بلوک‌های «پیش‌مطالعه/پیش‌خوانی» و «حل تمرین/تست» شمرده می‌شوند؛ مازاد هر مورد حساب نمی‌شود. مدت زنگ و دروس تخصصی در تنظیمات قابل تغییر است.</p></div>
   <div class="sectionhead"><h2>برنامه هفتگی</h2><span class="pill">ماتریس روز × ساعت</span></div>
-  <div class="card"><div class="weeknav" data-wknav="top"><button type="button" class="btn sm" data-wk="-1">› هفته قبل</button><div class="weeklbl"><b data-wklabel>این هفته</b><small data-wkrange></small></div><button type="button" class="btn sm" data-wk="1">هفته بعد ‹</button></div><p class="muted">نمای زمان‌بندی بلوک‌ها در روزهای هفته؛ برای مشاهده کامل، افقی پیمایش کنید.</p><div id="weekMatrix" class="weekmatrix"></div></div>
-  <div class="card"><h3>بلوک‌های ناقص برای جبران</h3><p class="muted" style="margin-top:0">بلوک‌های این هفته که کمتر از ۱۰۰٪ انجام شده‌اند؛ «جبران» یک بلوک یک‌باره در اولین زمان خالی فردا می‌سازد.</p><div id="carryList"></div></div>
+  <div class="card" id="matrixCard"><div class="row matrixhead"><strong>جدول روز × ساعت</strong><button type="button" class="btn sm" id="maxMatrix" aria-label="تمام‌صفحه">⛶ تمام‌صفحه</button></div><div class="weeknav" data-wknav="top"><button type="button" class="btn sm" data-wk="-1">› هفته قبل</button><div class="weeklbl"><b data-wklabel>این هفته</b><small data-wkrange></small></div><button type="button" class="btn sm" data-wk="1">هفته بعد ‹</button></div><p class="muted">نمای زمان‌بندی بلوک‌ها در روزهای هفته؛ برای مشاهده کامل، افقی پیمایش کنید.</p><div class="chipbar" id="weekFocusBar"></div><p class="muted" id="weekFocusInfo" style="margin:2px 0 6px"></p><div id="weekMatrix" class="weekmatrix"></div></div>
+  <div class="card"><h3>بلوک‌های عقب‌افتاده (زمانشان گذشته، تیک نخورده)</h3><p class="muted" style="margin-top:0">این‌ها جبرانی نیستند؛ بلوک‌های عادی برنامه همین هفته‌اند که ساعتشان تمام شده ولی کمتر از ۱۰۰٪ ثبت شده‌اند. اگر انجامش داده‌اید «انجام دادم» را بزنید؛ اگر نه، «جبران فردا» یک بلوک یک‌باره با عنوان «جبرانی · …» در اولین زمان خالی فردا می‌سازد؛ ✕ یعنی صرف‌نظر و حذف از این فهرست.</p><div id="carryList"></div></div>
 </section>
 
 <section class="page" id="exams">
@@ -309,7 +327,7 @@ textarea{min-height:82px;resize:vertical}
   <button data-page="settings"><span>⚙</span>تنظیمات</button>
 </nav>
 <div class="toast" id="toast"></div>
-<script src="app.js?v=5" defer></script>
+<script src="app.js?v=8" defer></script>
 <script>if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}</script>
 </body>
 </html>
